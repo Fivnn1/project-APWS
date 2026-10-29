@@ -39,13 +39,14 @@ Sistem penyiraman tanaman otomatis berbasis IoT (_Internet of Things_) yang mema
 
 ```text
 project-APWS/
-├── firmware/             # Kode program mikrokontroler (ESP32 / MicroPython)
-│   ├── main.py           # Program utama
-│   └── boot.py           # Inisialisasi koneksi WiFi
-├── dashboard/            # Kode web dashboard / antarmuka visualisasi
-│   └── app.py            # Aplikasi Streamlit / monitoring
-├── docs/                 # Skema sirkuit, diagram pengkabelan, dan dokumentasi
-├── .gitignore            # Daftar file yang diabaikan oleh Git
-├── requirements.txt      # Dependensi pustaka Python
-└── README.md             # Dokumentasi utama proyek
+├── firmware/               # Program mikrokontroler ESP32
+│   ├── boot.py             # Inisialisasi koneksi WiFi
+│   ├── main.py             # Logika sensor, relay pompa, & sinkronisasi Blynk
+│   ├── config.py   # Template konfigurasi WiFi & Blynk Auth Token
+│   └── blynklib.py         # Library Blynk MicroPython
+├── docs/                   # Dokumentasi pendukung
+│   ├── wiring-diagram.png  # Gambar skema rangkaian/sirkuit
+│   └── blynk-setup.md      # Catatan mapping Virtual Pin (V0, V1, dll)
+├── .gitignore              # Mengabaikan file rahasia/token
+└── README.md               # Dokumentasi utama proyek
 ```
