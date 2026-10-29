@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "author": "Kelompok 5 APWS",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "soil_sensor",
+      "top": 30,
+      "left": -190,
+      "attrs": { "label": "Soil Moisture (GPIO34)" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "water_level",
+      "top": 171.5,
+      "left": -192.2,
+      "attrs": { "label": "Water Level (GPIO35)" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": -150,
+      "left": 140,
+      "attrs": { "temperature": "28", "humidity": "65" }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay",
+      "top": 50,
+      "left": 210,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 186.35,
+      "left": 384,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "pump_led",
+      "top": 240,
+      "left": 250,
+      "attrs": { "color": "blue", "label": "Pompa Air (12V)" }
+    }
+  ],
+  "connections": [
+    ["esp:TX", "$serial:rx", "", []],
+    ["esp:RX", "$serial:tx", "", []],
+    ["soil_sensor:VCC", "esp:3V3", "red", ["v-20", "h60", "v-30"]],
+    ["soil_sensor:SIG", "esp:34", "green", ["v20", "h60"]],
+    ["soil_sensor:GND", "esp:GND.1", "black", ["v40", "h50", "v80"]],
+    ["water_level:VCC", "soil_sensor:VCC", "red", ["v-30", "h10", "v-80"]],
+    ["water_level:SIG", "esp:35", "cyan", ["v20", "h60"]],
+    ["water_level:GND", "esp:GND.1", "black", ["v40", "h60", "v-10"]],
+    ["dht:VCC", "esp:3V3", "red", ["v15.9", "h-200", "v177.7"]],
+    ["dht:SDA", "esp:4", "orange", ["v20", "h-30", "v190"]],
+    ["dht:GND", "esp:GND.2", "black", ["v40", "h-20", "v210"]],
+    ["relay:IN", "esp:26", "purple", ["h-20", "v160", "h-260", "v-80"]],
+    ["relay:GND", "esp:GND.2", "black", ["h-30", "v75"]],
+    ["relay:VCC", "esp:VIN", "red", ["h-15", "v175", "h-245"]],
+    ["relay:COM", "esp:VIN", "red", ["h60", "v165", "h-379"]],
+    ["relay:NO", "r1:1", "blue", ["h15", "v70"]],
+    ["r1:2", "pump_led:A", "blue", ["v25"]],
+    ["pump_led:C", "esp:GND.2", "black", ["h-50", "v-60"]]
+  ],
+  "dependencies": {}
+}
