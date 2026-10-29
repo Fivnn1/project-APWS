@@ -32,10 +32,10 @@ Proyek ini dikembangkan mengacu pada dokumen **Spesifikasi Kebutuhan Perangkat L
 
 ## 💻 Tech Stack
 
-- **Bahasa Pemrograman:** Python 3.9+
+- **Bahasa Pemrograman:** Python 3.15.1
 - **Antarmuka:** Command Line Interface (CLI / Terminal Interaktif)
-- **Format Penyimpanan Log:** CSV / JSON
-- **Simulasi Perangkat Keras:** Wokwi Simulator (`docs/diagram.json`)[cite: 36]
+- **Format Penyimpanan Log:** CSV
+- **Simulasi Perangkat Keras:** Wokwi Simulator
 - **Version Control:** Git & GitHub
 
 ---
