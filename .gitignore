@@ -1,0 +1,32 @@
+# Byte-compiled / Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Lingkungan Virtual (Virtual Environment)
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# File Log Dinamis (hanya lacak .gitkeep agar folder logs tetap ada di GitHub)
+logs/*
+!logs/.gitkeep
+*.log
+
+# Pengaturan Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# File Sampah Sistem Operasi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Kredensial / Variabel Lingkungan Lokal (jika ada nantinya)
+.env
+.env.local
