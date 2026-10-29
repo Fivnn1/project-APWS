@@ -1,36 +1,41 @@
-# 🌿 project-APWS (Automatic Plant Watering System)
+# 🌿 project-APWS (Automatic Plant Watering System) - CLI Simulation
 
-Sistem penyiraman tanaman otomatis berbasis IoT (_Internet of Things_) yang memantau kelembaban tanah secara _real-time_ dan mengotomatisasi pengairan tanaman untuk menjaga kondisi tanah tetap optimal[cite: 1].
+Program simulasi berbasis baris perintah (**Command Line Interface / CLI**) untuk sistem penyiraman tanaman otomatis (_Automatic Plant Watering System_)[cite: 6, 12]. Sistem ini memantau parameter kelembapan tanah, suhu udara, serta level air tandon secara berkala, dan mengotomatisasi pengairan dengan logika proteksi pengaman (_failsafe_)[cite: 12, 19, 20, 23].
+
+Proyek ini dikembangkan mengacu pada dokumen **Spesifikasi Kebutuhan Perangkat Lunak (SKPL) APWS Revisi 1.0.0**.
 
 ---
 
 ## 📌 Fitur Utama
 
-- **Otomatisasi Penyiraman:** Pompa air menyala secara otomatis ketika kelembaban tanah berada di bawah batas ambang (_threshold_).
-- **Monitoring Real-Time:** Pantau kondisi parameter kelembaban tanah dan status pompa dari jarak jauh melalui dashboard web / aplikasi IoT.
-- **Mode Manual & Otomatis:** Kendali fleksibel untuk menyiram tanaman secara manual maupun terjadwal/otomatis.
-- **Pencatatan Data (Logging):** Menyimpan riwayat pembacaan sensor dan aktivitas pengairan untuk evaluasi berkala.
+- **Pemantauan Kondisi Sensor:** Membaca data kelembapan tanah, suhu dan kelembapan udara, serta status ketersediaan air pada tandon[cite: 19].
+- **Penyiraman Otomatis Berbasis Ambang Batas:** Pompa menyala otomatis ketika kelembapan tanah berada di bawah nilai minimum dan berhenti saat mencapai batas maksimum yang ditentukan[cite: 19].
+- **Sistem Pengaman (Failsafe Protection):**
+  - Pembatasan durasi penyiraman maksimal (default 60 detik) untuk mencegah pengairan berlebih (_over-watering_)[cite: 19].
+  - Pencegahan pompa menyala jika air pada tandon berstatus rendah guna mencegah pompa berjalan kering (_dry-run protection_)[cite: 20, 23].
+- **Penyiraman Manual & Kendali Operasi:** Eksekusi penyiraman manual ("Siram Sekarang") dengan durasi kustom serta opsi penghentian kapan saja[cite: 20, 21].
+- **Pencatatan Riwayat (Logging):** Mencatat setiap aktivitas penyiraman secara rinci (waktu, durasi, pemicu otomatis/manual, kondisi kelembapan sebelum dan sesudah)[cite: 20].
 
 ---
 
-## 🛠️ Komponen & Perangkat Keras
+## 🛠️ Komponen & Parameter Sistem
 
-| Perangkat / Komponen                            | Fungsi                                                             |
-| :---------------------------------------------- | :----------------------------------------------------------------- |
-| **Microcontroller (ESP32)**                     | Otak pemrosesan data sensor, logika kendali, dan konektivitas WiFi |
-| **Capacitive / Resistive Soil Moisture Sensor** | Mengukur tingkat kelembaban tanah                                  |
-| **Relay Module (1/2 Channel)**                  | Saklar digital kendali daya pompa air                              |
-| **Pompa Air DC (Mini Diaphragm Pump 12V / 5V)** | Mengalirkan air menuju pot/tanah                                   |
-| **Catu Daya / Power Supply**                    | Sumber tegangan untuk mikrokontroler dan pompa                     |
-| **Selang & Nozzle Dripper**                     | Jalur distribusi air ke titik tanaman                              |
+| Parameter / Komponen            | Peran dalam Simulasi                                       | Acuan SKPL               |
+| :------------------------------ | :--------------------------------------------------------- | :----------------------- |
+| **Sensor Kelembapan Tanah**     | Mengukur persentase kadar air tanah (0–100%)               | SKPL-F-001[cite: 19]     |
+| **Sensor Suhu & Udara (DHT22)** | Mengukur suhu (°C) dan kelembapan udara (%)                | SKPL-F-002[cite: 19]     |
+| **Sensor Level Air**            | Mendeteksi ketersediaan volume air tandon (Cukup/Rendah)   | SKPL-F-003[cite: 19]     |
+| **Relay & Pompa Air**           | Mengendalikan status aliran air (Aktif / Nonaktif)         | SKPL-F-007[cite: 14, 19] |
+| **Ambang Batas (Threshold)**    | Nilai acuan aktivasi otomatis (Default: Min 40%, Maks 70%) | SKPL-F-006[cite: 19, 20] |
 
 ---
 
-## 💻 Tech Stack & Library
+## 💻 Tech Stack
 
-- **Firmware:** MicroPython
-- **Dashboard / Visualisasi:** Blynk IoT
-- **Bahasa Pemrograman:** Python
+- **Bahasa Pemrograman:** Python 3.9+
+- **Antarmuka:** Command Line Interface (CLI / Terminal Interaktif)
+- **Format Penyimpanan Log:** CSV / JSON
+- **Simulasi Perangkat Keras:** Wokwi Simulator (`docs/diagram.json`)[cite: 36]
 - **Version Control:** Git & GitHub
 
 ---
@@ -39,14 +44,18 @@ Sistem penyiraman tanaman otomatis berbasis IoT (_Internet of Things_) yang mema
 
 ```text
 project-APWS/
-├── firmware/               # Program mikrokontroler ESP32
-│   ├── boot.py             # Inisialisasi koneksi WiFi
-│   ├── main.py             # Logika sensor, relay pompa, & sinkronisasi Blynk
-│   ├── config.py   # Template konfigurasi WiFi & Blynk Auth Token
-│   └── blynklib.py         # Library Blynk MicroPython
-├── docs/                   # Dokumentasi pendukung
-│   ├── wiring-diagram.png  # Gambar skema rangkaian/sirkuit
-│   └── blynk-setup.md      # Catatan mapping Virtual Pin (V0, V1, dll)
-├── .gitignore              # Mengabaikan file rahasia/token
-└── README.md               # Dokumentasi utama proyek
+├── src/                  # Kode sumber modul simulasi
+│   ├── __init__.py
+│   ├── sensor.py         # Logika simulasi & pembacaan sensor tanah/air/suhu
+│   ├── controller.py     # Logika ambang batas, kontrol pompa, & proteksi failsafe
+│   └── storage.py        # Pengelolaan pencatatan log riwayat penyiraman
+├── docs/                 # Dokumentasi proyek
+│   ├── diagram.json      # Konfigurasi skema sirkuit simulator Wokwi
+│   └── SKPL-APWS.pdf     # Dokumen Spesifikasi Kebutuhan Perangkat Lunak
+├── logs/                 # Direktori penyimpanan file log
+│   └── .gitkeep
+├── .gitignore            # Daftar file yang diabaikan oleh Git
+├── requirements.txt      # Dependensi modul pendukung Python
+├── main.py               # Program utama / entry-point menu interaktif CLI
+└── README.md             # Dokumentasi utama repositori
 ```
