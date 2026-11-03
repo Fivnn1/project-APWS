@@ -44,11 +44,11 @@ Proyek ini dikembangkan mengacu pada dokumen **Spesifikasi Kebutuhan Perangkat L
 
 ```text
 project-APWS/
-├── src/                  # Kode sumber modul simulasi
-│   ├── __init__.py
-│   ├── sensor.py         # Logika simulasi & pembacaan sensor tanah/air/suhu
-│   ├── controller.py     # Logika ambang batas, kontrol pompa, & proteksi failsafe
-│   └── storage.py        # Pengelolaan pencatatan log riwayat penyiraman
+├── code/                  # Kode sumber modul simulasi
+│   ├── main.py              # Menu utama CLI, alur navigasi aplikasi
+|   ├── auth_device.py       # Modul akun & pengaturan profil tanaman
+|   ├── sensor_monitor.py    # Modul simulasi sensor & pemantauan data
+|   └── schedule_log.py      # Modul penjadwalan, riwayat, & notifikasi
 ├── docs/                 # Dokumentasi proyek
 │   ├── diagram.json      # Konfigurasi skema sirkuit simulator Wokwi
 │   └── SKPL-APWS.pdf     # Dokumen Spesifikasi Kebutuhan Perangkat Lunak
