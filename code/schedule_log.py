@@ -31,7 +31,7 @@ def tambah_jadwal(hari, jam, durasi):
         return
     data_jadwal.append({"hari": hari, "jam": jam, "durasi": durasi})
     print("Jadwal berhasil ditambahkan")
-    
+
 # Fungsi untuk menampilkan semua jadwal
 def tampilkan_jadwal():
     print("===Daftar Jadwal===")
@@ -41,3 +41,17 @@ def tampilkan_jadwal():
     for i in range(len(data_jadwal)):
         jadwal = data_jadwal[i]
         print(f"{i + 1}. {jadwal['hari']} | {jadwal['jam']} | {jadwal['durasi']} detik")
+
+# Fungsi untuk membaca semua riwayat dari file
+def baca_log():
+    daftar_log = []
+    try:
+        file = open(file_log, "r")
+        for baris in file:
+            baris = baris.strip()
+            if baris != "":
+                daftar_log.append(baris.split(","))
+        file.close()
+    except FileNotFoundError:
+        pass  # file belum ada = belum ada riwayat
+    return daftar_log
