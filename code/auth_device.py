@@ -19,3 +19,4 @@ def registrasi():
     return
   data_penggguna[email] = hash_password(password)
   print("Registrasi berhasil silahkan login")
+
