@@ -22,3 +22,13 @@ def validasi_jadwal(hari, jam, durasi):
     if durasi < 1 or durasi > durasi_maksimum:
         return False, f"Durasi harus 1 - {durasi_maksimum} detik"
     return True, "Jadwal valid"
+
+# Fungsi untuk menambah jadwal
+def tambah_jadwal(hari, jam, durasi):
+    valid, pesan = validasi_jadwal(hari, jam, durasi)
+    if not valid:
+        print(pesan)
+        return
+    data_jadwal.append({"hari": hari, "jam": jam, "durasi": durasi})
+    print("Jadwal berhasil ditambahkan")
+    
