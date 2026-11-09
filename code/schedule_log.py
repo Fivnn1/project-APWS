@@ -32,3 +32,12 @@ def tambah_jadwal(hari, jam, durasi):
     data_jadwal.append({"hari": hari, "jam": jam, "durasi": durasi})
     print("Jadwal berhasil ditambahkan")
     
+# Fungsi untuk menampilkan semua jadwal
+def tampilkan_jadwal():
+    print("===Daftar Jadwal===")
+    if len(data_jadwal) == 0:
+        print("Belum ada jadwal")
+        return
+    for i in range(len(data_jadwal)):
+        jadwal = data_jadwal[i]
+        print(f"{i + 1}. {jadwal['hari']} | {jadwal['jam']} | {jadwal['durasi']} detik")
