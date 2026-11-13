@@ -33,6 +33,7 @@ def login():
     password = hash_password(kata_sandi)
     if data_pengguna[email] == password:
       print("Login berhasil ! ")
+      
     else:
       print("Kata sandi salah")
   if email not in data_pengguna or "@" not in email:
