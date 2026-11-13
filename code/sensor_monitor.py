@@ -23,7 +23,13 @@ def validasi_data_sensor(kelembapan_tanah, suhu, kelembapan_udara, level_air):
 def simulasi_data():
     # Untuk membuat nilai random
     tanah = random.randint(0, 100)
-    suhu = random.randuniform(10.0, 50.0)
+    # suhu = random.randuniform(10.0, 50.0)
+    # " ini salah nulis fungsi? "
+
+    suhu = random.uniform(10.0, 50.0)
     udara = random.randint(0, 100)
-    air = random.choice("CUKUP", "CUKUP", "CUKUP", "KURANG")
-    
+    # menambahkan [] karena banyak argumen
+    air = random.choice(["CUKUP", "CUKUP", "CUKUP", "KURANG"])
+
+    # menambahkan return agar bisa mengembalikan nilai
+    return tanah, suhu, udara, air
