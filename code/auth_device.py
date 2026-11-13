@@ -17,6 +17,6 @@ def registrasi():
   if len(password) < 6:
     print("Kata sandi minimal 6 karakter")
     return
-  data_penggguna[email] = hash_password(password)
-  print("Registrasi berhasil silahkan login")
+    data_penggguna[email] = hash_password(password)
+    print("Registrasi berhasil silahkan login")
 
