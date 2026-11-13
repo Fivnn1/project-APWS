@@ -18,17 +18,17 @@ def tampilkanBanner():
     print("\n======================| APWS |======================\n")
 
 def inputMenu():
-    pilih = input("Masukkan Nomor Menu (1/2/3/0) : ")
+    pilih = input("Pilih  Menu (1/2/3/0) : ").strip()
 
 
     if(pilih == '1'):
         print("Watering Control Menu")
-
+        return True
 
 
     elif(pilih == '2'):
         print("Schedule Log")
-
+        return True
 
     
     elif(pilih == '3'):
@@ -44,40 +44,34 @@ def inputMenu():
         # 3. Tampilkan output ke terminal
         print(f"[{waktu}] \nData Sensor -> Tanah: {t}%, \nSuhu: {s}°C, \nUdara: {u}%, \nAir: {a}")
         print(f"Status Validasi: {pesan}")
-
+        return True
 
     
     elif pilih == "0":
         print("Keluar Aplikasi APWS")
-
-        auth_device.login()
-
         return False
        
-
     
     else:
         print("input tidak valid, silahkan masukkan 1, 2, 3 atau 0")
-    
-    return True
+        return True
 
 
 
 if __name__ == "__main__":
-    while True:
 
-        status_login = auth_device.login()
+        while True:
 
-        if status_login:
+            if auth_device.auth_menu():
+                while True:
+                    tampilkanBanner()
+                    lanjut = inputMenu()
 
-            tampilkanBanner()
-            lanjut = inputMenu()
+                    if not lanjut:
+                        break
 
-            if not lanjut:
+                    input("\nTekan Enter untuk kembali ke Menu Utama...")
+
+            else:
+                print("Aplikasi dimatikan. Sampai jumpa!")
                 break
-
-            input("\nTekan Enter untuk kembali ke Menu Utama...")
-
-        else:
-            print("Aplikasi dimatikan. Sampai jumpa!")
-            break
