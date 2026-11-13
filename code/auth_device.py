@@ -10,16 +10,16 @@ def registrasi():
   email = input("Masukkan Email : ").strip()
   kata_sandi = input("Masukkan Kata Sandi : ")
 
-  if "@" not in email or "." not in email: #menambahkan cek .
-    print("Email tidak valid")
+  if "@" not in email or "." not in email: #menambahkan cek "."
+    print("\\\\ Email tidak valid ////")
     return
   
   if email in data_pengguna:
-    print("Email sudah terdaftar")
+    print("\\\\ Email sudah terdaftar ////")
     return
   
   if len(kata_sandi) < 6:
-    print("Kata sandi minimal 6 karakter")
+    print("[[ Kata sandi minimal 6 karakter ]]")
     return
   
   password = hash_password(kata_sandi)
@@ -47,22 +47,26 @@ def login():
   #     print("Kata sandi minimal 6 karakter")
 
   if email not in data_pengguna:
-    print("Gagal, email tidak terdaftar!")
+    print("\\\\ Gagal, email tidak terdaftar! ////")
     return False
 
   password_hash = hash_password(kata_sandi)
   if data_pengguna[email] == password_hash:
-    print("Login berhasil!")
+    print("\n===================")
+    print("| Login berhasil! |")
+    print("===================\n")
     return True
   else:
-    print("Gagal, kata sandi salah!")
+    print("\n=========================")
+    print("|Gagal, kata sandi salah!|")
+    print("=========================\n")
     return False
 
 def auth_menu():
   while True:
-    print("================| Autentikasi APWS |===============\n")
+    print("\n\n================| Autentikasi APWS |===============\n")
     
-    print("""Pilih menu :
+    print("""   Pilih menu :
     1. Login
     2. Registrasi
     0. Keluar Aplikasi""")
@@ -79,6 +83,6 @@ def auth_menu():
     elif pilih == "0":
       return False
     else:
-        print("Pilihan tidak valid, silahkan masukkan 1, 2 atau 0")
+        print("\\\\ Pilihan tidak valid, silahkan masukkan 1, 2 atau 0 ///")
 
   

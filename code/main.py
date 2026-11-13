@@ -11,8 +11,8 @@ def tampilkanBanner():
 
     Pilih menu :
     1. Watering Control
-    2. Sensor Monitor
-    3. Schedule Log
+    2. Schedule Log
+    3. Sensor Monitor
     0. Keluar""")
 
     print("\n======================| APWS |======================\n")
@@ -42,8 +42,8 @@ def inputMenu():
         pesan = validasi_data_sensor(t, s, u, a)
 
         # 3. Tampilkan output ke terminal
-        print(f"[{waktu}] \nData Sensor -> Tanah: {t}%, \nSuhu: {s}°C, \nUdara: {u}%, \nAir: {a}")
-        print(f"Status Validasi: {pesan}")
+        print(f"[{waktu}] \nData Sensor:\n Tanah: {t}%, \nSuhu: {s}°C, \nUdara: {u}%, \nAir: {a}")
+        print(f"[[ Status Validasi: {pesan} ]]")
         return True
 
     
